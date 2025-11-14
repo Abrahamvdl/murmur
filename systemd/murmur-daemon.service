@@ -12,8 +12,16 @@ RestartSec=5
 # Environment variables
 Environment="PYTHONUNBUFFERED=1"
 Environment="QT_QPA_PLATFORM=wayland"
-# Uncomment and adjust for your AMD GPU if needed
+
+# AMD GPU Support: Uncomment and adjust for your GPU if needed
+# Find your version with: rocminfo | grep "Name:"
 # Environment="HSA_OVERRIDE_GFX_VERSION=10.3.0"
+
+# Development Setup: If running from source (not pip installed):
+# 1. Change ExecStart to: %h/path/to/repo/venv/bin/murmur-daemon --log-level INFO
+# 2. Add: WorkingDirectory=%h/path/to/repo
+# 3. Add: Environment="LD_LIBRARY_PATH=%h/.local/lib"
+# 4. Uncomment HSA_OVERRIDE_GFX_VERSION above if using AMD GPU
 
 # Resource limits
 MemoryMax=4G
