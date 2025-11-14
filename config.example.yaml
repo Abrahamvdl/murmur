@@ -3,7 +3,10 @@
 # Model settings
 model:
   size: "medium"  # Options: tiny, base, small, medium, large
-  language: "en"  # English only for this version
+  language: null  # Language code or null for auto-detect
+                  # Auto-detect: null (detects 99+ languages automatically)
+                  # Specific language: "en" (English), "de" (German), "es" (Spanish), etc.
+                  # See https://github.com/openai/whisper#available-models-and-languages
   device: "cuda"  # Device name for GPU (works with AMD ROCm, not NVIDIA CUDA)
   compute_type: "float16"  # float16 for GPU, int8 for CPU
   model_path: null  # Optional: custom model path
