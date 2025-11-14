@@ -133,7 +133,7 @@ Microphone → sounddevice → VAD Filter → Chunks → Transcriber
 
 **Model Configuration**:
 - Size: Medium (balanced accuracy/speed)
-- Language: English only
+- Language: Auto-detect (99+ languages supported)
 - Compute type: float16 (GPU)
 - Device: CUDA (ROCm backend)
 
@@ -374,7 +374,7 @@ Text appears in application
 ## Future Enhancements
 
 ### Planned Features
-- [ ] Multi-language support
+- [x] Multi-language support (99+ languages with auto-detection)
 - [ ] Custom model selection
 - [ ] Punctuation and capitalization commands
 - [ ] History of transcriptions

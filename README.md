@@ -27,7 +27,6 @@ Transform your voice into text anywhere on your system with a simple keyboard sh
 - ❌ **NVIDIA/Intel GPUs**: Not currently supported (contributions welcome for CUDA/OpenVINO backends)
 - ⚠️ **X11**: May work but untested; Wayland is the primary target
 - ⚠️ **CPU-only mode**: Possible but slow (~10x slower than GPU)
-- ⚠️ **Non-English**: Single language only (contributions welcome for multi-language)
 
 If this matches your setup, read on! Otherwise, consider alternatives like [Nerd Dictation](https://github.com/ideasman42/nerd-dictation) or [Talon Voice](https://talonvoice.com/).
 
@@ -38,6 +37,7 @@ If this matches your setup, read on! Otherwise, consider alternatives like [Nerd
 - 🎤 **System-wide voice input** - Works in any application
 - ⚡ **Real-time transcription** - See text as you speak
 - 🎯 **High accuracy** - Powered by Whisper medium model
+- 🌍 **Multilingual support** - Auto-detects 99+ languages (English, German, Spanish, French, etc.)
 - 🚀 **AMD GPU accelerated** - Fast inference with ROCm
 - 🖼️ **Visual feedback** - Floating window with waveform and live transcription
 - ⌨️ **Smart text insertion** - Direct injection, auto-paste, or clipboard
@@ -379,9 +379,9 @@ Contributions are welcome! This is an alpha project with plenty of room for impr
 
 **High-priority contributions:**
 - NVIDIA/Intel GPU backend support
-- Multi-language support
 - Automated tests (pytest)
 - Distribution packaging (AUR, Deb, RPM)
+- Custom vocabulary/word boosting
 
 **Process:**
 1. Open an issue to discuss major changes first
@@ -461,7 +461,7 @@ MIT License - See [LICENSE](LICENSE) for details.
 - [x] GUI with waveform visualization
 - [x] 3-tier text insertion
 - [x] Hyprland integration
-- [ ] Multi-language support
+- [x] Multi-language support (99+ languages with auto-detection)
 - [ ] Custom model selection
 - [ ] Transcription history
 - [ ] In-window text editing
@@ -480,9 +480,9 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 **Contributions welcome for:**
 - NVIDIA/Intel GPU support (CUDA, OpenVINO backends)
-- Multi-language support
 - Automated tests
 - Packaging (AUR, Debian, Fedora)
+- Custom vocabulary/word boosting
 - Bug fixes and documentation improvements
 
 **Links:**

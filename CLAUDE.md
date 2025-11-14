@@ -148,6 +148,7 @@ groups | grep input  # User must be in 'input' group
 
 **Key settings**:
 - `model.size`: "tiny" | "base" | "small" | "medium" | "large" (medium is default)
+- `model.language`: null (auto-detect) | "en" (English) | "de" (German) | "es" (Spanish) | etc. (99+ languages supported)
 - `model.device`: "cuda" (ROCm backend for AMD GPUs)
 - `audio.chunk_duration`: 1.0-5.0s (balance latency vs accuracy, default 2.0)
 - `audio.vad_aggressiveness`: 0-3 (higher = more aggressive silence filtering)

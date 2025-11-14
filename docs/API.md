@@ -297,7 +297,7 @@ Gracefully shut down daemon.
 ```yaml
 model:
   size: string                    # "tiny" | "base" | "small" | "medium" | "large"
-  language: string                # "en" for English only
+  language: string | null         # null (auto-detect) | "en" | "de" | "es" | etc. (99+ languages)
   device: string                  # "cuda" for ROCm
   compute_type: string            # "float16" | "int8"
   model_path: string | null       # Optional custom model path
@@ -334,7 +334,7 @@ logging:
 ```yaml
 model:
   size: "medium"
-  language: "en"
+  language: null  # Auto-detect language
   device: "cuda"
   compute_type: "float16"
 
