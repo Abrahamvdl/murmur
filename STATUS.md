@@ -339,8 +339,8 @@ bind = SUPER SHIFT, R, exec, whisper stop
 
 ## 📞 Support
 
-- **Issues**: https://github.com/abrahamvdl/murmur/issues
-- **Discussions**: https://github.com/abrahamvdl/murmur/discussions
+- **Issues**: https://github.com/Abrahamvdl/murmur/issues
+- **Discussions**: https://github.com/Abrahamvdl/murmur/discussions
 - **Documentation**: See docs/ folder
 
 ---

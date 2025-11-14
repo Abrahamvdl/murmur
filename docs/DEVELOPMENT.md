@@ -52,7 +52,7 @@ sudo apt install qt6-base-dev qt6-wayland
 
 ```bash
 cd ~/Workspace/Linux
-git clone https://github.com/abrahamvdl/murmur.git
+git clone https://github.com/Abrahamvdl/murmur.git
 cd Whisper
 ```
 
@@ -613,8 +613,8 @@ Recommended `.vscode/settings.json`:
 - [ROCm Documentation](https://rocm.docs.amd.com/)
 
 ### Community
-- Project Issues: https://github.com/abrahamvdl/murmur/issues
-- Discussions: https://github.com/abrahamvdl/murmur/discussions
+- Project Issues: https://github.com/Abrahamvdl/murmur/issues
+- Discussions: https://github.com/Abrahamvdl/murmur/discussions
 
 ---
 

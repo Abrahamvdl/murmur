@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Murmur is a real-time voice-to-text transcription system for Linux Wayland that uses OpenAI's Whisper model with AMD GPU (ROCm) acceleration. It provides system-wide voice input through keyboard shortcuts via a daemon-based architecture.
 
-**Repository**: https://github.com/abrahamvdl/murmur
+**Repository**: https://github.com/Abrahamvdl/murmur
 
 ## Core Architecture
 

@@ -83,7 +83,7 @@ See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for detailed setup instructions.
 
 ```bash
 # Clone your fork
-git clone https://github.com/abrahamvdl/murmur.git
+git clone https://github.com/Abrahamvdl/murmur.git
 cd murmur
 
 # Create virtual environment

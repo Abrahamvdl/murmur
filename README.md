@@ -90,7 +90,7 @@ sudo apt install python3 python3-pip rocm-hip-sdk portaudio19-dev qt6-base-dev q
 ### Step 2: Clone Repository
 
 ```bash
-git clone https://github.com/abrahamvdl/murmur.git
+git clone https://github.com/Abrahamvdl/murmur.git
 cd murmur
 ```
 
@@ -348,7 +348,7 @@ Floating overlay that displays:
 
 ```bash
 # Clone repository
-git clone https://github.com/abrahamvdl/murmur.git
+git clone https://github.com/Abrahamvdl/murmur.git
 cd Whisper
 
 # Create virtual environment

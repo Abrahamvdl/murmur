@@ -35,7 +35,7 @@ sudo pacman -S python python-pip rocm-hip-sdk portaudio ydotool qt6-base qt6-way
 
 # Clone repository
 cd ~/Downloads
-git clone https://github.com/abrahamvdl/murmur.git
+git clone https://github.com/Abrahamvdl/murmur.git
 cd Whisper
 
 # Install Python dependencies
@@ -104,7 +104,7 @@ sudo make install
 ```bash
 # Clone repository
 cd ~/Downloads
-git clone https://github.com/abrahamvdl/murmur.git
+git clone https://github.com/Abrahamvdl/murmur.git
 cd Whisper
 
 # Create virtual environment (optional but recommended)
@@ -579,7 +579,7 @@ tail -f ~/.local/share/whisper/whisper.log
 ```
 
 ### Report Issues
-- GitHub Issues: https://github.com/abrahamvdl/murmur/issues
+- GitHub Issues: https://github.com/Abrahamvdl/murmur/issues
 - Include:
   - OS and distribution
   - AMD GPU model
@@ -588,7 +588,7 @@ tail -f ~/.local/share/whisper/whisper.log
   - Configuration file (remove sensitive info)
 
 ### Community
-- Discussions: https://github.com/abrahamvdl/murmur/discussions
+- Discussions: https://github.com/Abrahamvdl/murmur/discussions
 - Matrix/Discord: (TODO)
 
 ---
