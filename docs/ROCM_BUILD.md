@@ -143,16 +143,16 @@ The daemon needs to find the ROCm-enabled library. Add this to your daemon start
 **Option 1: Export before running**
 ```bash
 export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
-python -m whisper_daemon.daemon
+python -m murmur_daemon.daemon
 ```
 
 **Option 2: Add to systemd service**
 
-Edit `~/.config/systemd/user/whisper-daemon.service`:
+Edit `~/.config/systemd/user/murmur-daemon.service`:
 ```ini
 [Service]
 Environment="LD_LIBRARY_PATH=/home/YOUR_USERNAME/.local/lib"
-ExecStart=/home/YOUR_USERNAME/.local/bin/whisper-daemon
+ExecStart=/home/YOUR_USERNAME/.local/bin/murmur-daemon
 ```
 
 **Option 3: Add to shell profile**
@@ -172,7 +172,7 @@ whi status
 rocm-smi --showuse
 
 # Check logs for "Model loaded successfully on cuda"
-journalctl --user -u whisper-daemon -f
+journalctl --user -u murmur-daemon -f
 ```
 
 ## Troubleshooting
@@ -204,7 +204,7 @@ source ~/.bashrc
 
 Check daemon logs for errors:
 ```bash
-journalctl --user -u whisper-daemon -n 50
+journalctl --user -u murmur-daemon -n 50
 ```
 
 Common causes:
@@ -231,7 +231,7 @@ After successful build:
 **Check Model Load Time:**
 ```bash
 # Watch daemon startup
-journalctl --user -u whisper-daemon -f
+journalctl --user -u murmur-daemon -f
 ```
 
 Expected: "Model loaded successfully on cuda" with ~15-20 second load time for medium model.

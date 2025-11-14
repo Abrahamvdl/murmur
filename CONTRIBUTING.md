@@ -1,6 +1,6 @@
-# Contributing to Whisper Voice Input
+# Contributing to Murmur
 
-Thank you for your interest in contributing to Whisper Voice Input! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to Murmur! This document provides guidelines and information for contributors.
 
 ---
 
@@ -15,12 +15,38 @@ Be respectful, inclusive, and constructive in all interactions. We're building t
 ### Reporting Bugs
 
 1. **Search existing issues** to avoid duplicates
-2. **Create a new issue** with:
-   - Clear, descriptive title
-   - Steps to reproduce
-   - Expected vs actual behavior
-   - System information (OS, GPU, ROCm version, Python version)
-   - Relevant logs (`journalctl --user -u whisper-daemon`)
+2. **Check troubleshooting** in [docs/INSTALLATION.md](docs/INSTALLATION.md)
+3. **Create a new issue** with this template:
+
+```markdown
+## Environment
+- **Distro**: (e.g., Arch Linux, Ubuntu 22.04)
+- **GPU**: (e.g., RX 6700 XT, RX 7900 XTX)
+- **ROCm Version**: `rocminfo | head -5`
+- **Compositor**: (e.g., Hyprland 0.35, Sway 1.8)
+- **Python Version**: `python --version`
+- **CTranslate2**: `python -c "import ctranslate2; print(ctranslate2.__version__)"`
+
+## Bug Description
+Clear description of what's happening vs what you expected.
+
+## Steps to Reproduce
+1. Step 1
+2. Step 2
+3. Step 3
+
+## Logs
+```
+journalctl --user -u murmur-daemon -n 50
+# Or if running in foreground:
+# python -m murmur_daemon.daemon --log-level DEBUG
+```
+
+## Additional Context
+Screenshots, configuration files, etc.
+```
+
+**Note**: Since this project targets AMD GPUs specifically, please include your GPU model and ROCm version. Issues on unsupported hardware (NVIDIA/Intel) will be marked as "help wanted" but may not be fixed by the maintainer.
 
 ### Suggesting Features
 
@@ -57,8 +83,8 @@ See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for detailed setup instructions.
 
 ```bash
 # Clone your fork
-git clone https://github.com/yourusername/Whisper.git
-cd Whisper
+git clone https://github.com/abrahamvdl/murmur.git
+cd murmur
 
 # Create virtual environment
 python -m venv venv
@@ -69,7 +95,7 @@ pip install -r requirements.txt
 pip install -e ".[dev]"
 
 # Run daemon in debug mode
-python -m whisper_daemon.daemon --log-level DEBUG
+python -m murmur_daemon.daemon --log-level DEBUG
 ```
 
 ---
@@ -87,7 +113,7 @@ black .
 
 **Linting**:
 ```bash
-flake8 whisper_daemon/ whisper_gui/ whisper_cli/
+flake8 murmur_daemon/ murmur_gui/ murmur_cli/
 ```
 
 **Type Hints** (encouraged but not required):
@@ -185,11 +211,11 @@ fix: resolve clipboard paste issues
 
 ### High Priority
 
-- [ ] **Unit Tests**: Add comprehensive test coverage
+- [ ] **GPU Backend Support**: NVIDIA (CUDA), Intel (OpenVINO) - requires test hardware
+- [ ] **Unit Tests**: Add comprehensive test coverage with pytest
 - [ ] **Multi-language Support**: Extend beyond English
-- [ ] **Custom Model Support**: Allow user-provided models
+- [ ] **Distribution Packages**: AUR, Debian (.deb), Fedora (.rpm)
 - [ ] **Performance Optimization**: Reduce latency, improve GPU usage
-- [ ] **Error Handling**: Improve error messages and recovery
 
 ### Medium Priority
 

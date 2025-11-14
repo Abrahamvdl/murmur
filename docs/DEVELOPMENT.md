@@ -1,4 +1,4 @@
-# Whisper Voice Input - Development Guide
+# Murmur - Development Guide
 
 ## Development Setup
 
@@ -52,7 +52,7 @@ sudo apt install qt6-base-dev qt6-wayland
 
 ```bash
 cd ~/Workspace/Linux
-git clone https://github.com/yourusername/Whisper.git
+git clone https://github.com/abrahamvdl/murmur.git
 cd Whisper
 ```
 
@@ -126,7 +126,7 @@ ls -l /dev/uinput
 
 ```
 Whisper/
-├── whisper_daemon/          # Background service
+├── murmur_daemon/          # Background service
 │   ├── __init__.py
 │   ├── daemon.py            # Main daemon process
 │   ├── transcriber.py       # Whisper model handler
@@ -135,13 +135,13 @@ Whisper/
 │   ├── text_injector.py     # Text insertion with fallbacks
 │   └── config.py            # Configuration management
 │
-├── whisper_gui/             # GUI window
+├── murmur_gui/             # GUI window
 │   ├── __init__.py
 │   ├── window.py            # Main Qt window
 │   ├── waveform.py          # Audio visualization
 │   └── styles.py            # UI theming
 │
-├── whisper_cli/             # Command-line interface
+├── murmur_cli/             # Command-line interface
 │   ├── __init__.py
 │   └── cli.py               # CLI commands
 │
@@ -152,7 +152,7 @@ Whisper/
 │   └── INSTALLATION.md
 │
 ├── systemd/                 # Systemd service files
-│   └── whisper-daemon.service
+│   └── murmur-daemon.service
 │
 ├── tests/                   # Unit tests (TODO)
 │
@@ -174,7 +174,7 @@ Whisper/
 source venv/bin/activate
 
 # Run daemon in foreground with debug logging
-python -m whisper_daemon.daemon --log-level DEBUG
+python -m murmur_daemon.daemon --log-level DEBUG
 ```
 
 ### Test CLI Commands
@@ -186,12 +186,12 @@ In a separate terminal:
 source venv/bin/activate
 
 # Test status
-python -m whisper_cli.cli status
+python -m murmur_cli.cli status
 
 # Test recording
-python -m whisper_cli.cli start
+python -m murmur_cli.cli start
 # ... speak ...
-python -m whisper_cli.cli stop
+python -m murmur_cli.cli stop
 ```
 
 ### Run GUI Standalone
@@ -199,7 +199,7 @@ python -m whisper_cli.cli stop
 For testing GUI independently:
 
 ```bash
-python -m whisper_gui.window
+python -m murmur_gui.window
 ```
 
 ---
@@ -216,26 +216,26 @@ git checkout -b feature/your-feature-name
 # ... edit files ...
 
 # Format code
-black whisper_daemon/ whisper_gui/ whisper_cli/
+black murmur_daemon/ murmur_gui/ murmur_cli/
 
 # Check linting
-flake8 whisper_daemon/ whisper_gui/ whisper_cli/
+flake8 murmur_daemon/ murmur_gui/ murmur_cli/
 
 # Type checking (optional)
-mypy whisper_daemon/ whisper_gui/ whisper_cli/
+mypy murmur_daemon/ murmur_gui/ murmur_cli/
 ```
 
 ### 2. Testing Changes
 
 ```bash
 # Stop daemon if running
-systemctl --user stop whisper-daemon
+systemctl --user stop murmur-daemon
 
 # Run daemon in debug mode
-python -m whisper_daemon.daemon --log-level DEBUG
+python -m murmur_daemon.daemon --log-level DEBUG
 
 # In another terminal, test your changes
-python -m whisper_cli.cli start
+python -m murmur_cli.cli start
 ```
 
 ### 3. Commit Changes
@@ -262,7 +262,7 @@ logging:
 Or run daemon with flag:
 
 ```bash
-python -m whisper_daemon.daemon --log-level DEBUG
+python -m murmur_daemon.daemon --log-level DEBUG
 ```
 
 ### View Logs
@@ -272,7 +272,7 @@ python -m whisper_daemon.daemon --log-level DEBUG
 tail -f ~/.local/share/whisper/whisper.log
 
 # If using systemd
-journalctl --user -u whisper-daemon -f
+journalctl --user -u murmur-daemon -f
 ```
 
 ### Debug Specific Components
@@ -280,14 +280,14 @@ journalctl --user -u whisper-daemon -f
 #### Audio Capture
 
 ```python
-# In whisper_daemon/audio_capture.py, add:
+# In murmur_daemon/audio_capture.py, add:
 logger.debug(f"Audio chunk: {len(audio_data)} samples, RMS: {np.sqrt(np.mean(audio_data**2))}")
 ```
 
 #### Whisper Transcription
 
 ```python
-# In whisper_daemon/transcriber.py, add:
+# In murmur_daemon/transcriber.py, add:
 logger.debug(f"Processing audio chunk of {duration}s")
 logger.debug(f"Transcription result: {text}")
 ```
@@ -295,7 +295,7 @@ logger.debug(f"Transcription result: {text}")
 #### Text Injection
 
 ```python
-# In whisper_daemon/text_injector.py, add:
+# In murmur_daemon/text_injector.py, add:
 logger.debug(f"Attempting method: {method.value}")
 logger.debug(f"Text to insert: {text[:50]}...")
 ```
@@ -309,13 +309,13 @@ logger.debug(f"Text to insert: {text[:50]}...")
 **Solution**:
 ```bash
 # Check if running
-ps aux | grep whisper-daemon
+ps aux | grep murmur-daemon
 
 # Check logs
-journalctl --user -u whisper-daemon --no-pager -n 50
+journalctl --user -u murmur-daemon --no-pager -n 50
 
 # Restart
-systemctl --user restart whisper-daemon
+systemctl --user restart murmur-daemon
 ```
 
 #### "Failed to load model"
@@ -369,14 +369,14 @@ python -c "import sounddevice as sd; import numpy as np; print(sd.rec(16000, sam
 
 ### Manual Testing Checklist
 
-- [ ] Start daemon: `systemctl --user start whisper-daemon`
-- [ ] Check status: `whi status`
-- [ ] Start recording: `whi start`
+- [ ] Start daemon: `systemctl --user start murmur-daemon`
+- [ ] Check status: `murmur status`
+- [ ] Start recording: `murmur start`
 - [ ] Verify GUI window appears
 - [ ] Speak some text
 - [ ] Verify waveform animates
 - [ ] Verify transcription appears in real-time
-- [ ] Stop recording: `whi stop`
+- [ ] Stop recording: `murmur stop`
 - [ ] Verify text is inserted/copied
 - [ ] Check logs for errors
 
@@ -390,7 +390,7 @@ pytest tests/
 pytest tests/test_ipc_server.py
 
 # Run with coverage
-pytest --cov=whisper_daemon tests/
+pytest --cov=murmur_daemon tests/
 ```
 
 ### Integration Tests (TODO)
@@ -428,7 +428,7 @@ We use `flake8` for linting:
 
 ```bash
 # Lint all Python files
-flake8 whisper_daemon/ whisper_gui/ whisper_cli/
+flake8 murmur_daemon/ murmur_gui/ murmur_cli/
 ```
 
 ### Type Hints
@@ -528,7 +528,7 @@ docs(api): update IPC protocol documentation
 
 ```bash
 # Profile daemon startup
-python -m cProfile -o profile.stats -m whisper_daemon.daemon
+python -m cProfile -o profile.stats -m murmur_daemon.daemon
 
 # Analyze results
 python -m pstats profile.stats
@@ -558,7 +558,7 @@ def load_model():
     ...
 
 # Run with profiler
-python -m memory_profiler whisper_daemon/transcriber.py
+python -m memory_profiler murmur_daemon/transcriber.py
 ```
 
 ---
@@ -613,8 +613,8 @@ Recommended `.vscode/settings.json`:
 - [ROCm Documentation](https://rocm.docs.amd.com/)
 
 ### Community
-- Project Issues: https://github.com/yourusername/Whisper/issues
-- Discussions: https://github.com/yourusername/Whisper/discussions
+- Project Issues: https://github.com/abrahamvdl/murmur/issues
+- Discussions: https://github.com/abrahamvdl/murmur/discussions
 
 ---
 
@@ -633,4 +633,4 @@ A: Native Wayland support, active development, works with modern compositors.
 A: Yes, but some features may behave differently. Wayland is the primary target.
 
 **Q: How do I add a new text insertion method?**
-A: Extend `TextInjector` class in `whisper_daemon/text_injector.py`, add new `InsertionMethod` enum value, implement insertion logic.
+A: Extend `TextInjector` class in `murmur_daemon/text_injector.py`, add new `InsertionMethod` enum value, implement insertion logic.

@@ -1,4 +1,4 @@
-# Whisper Voice Input - Project Status
+# Murmur - Project Status
 
 **Status**: ✅ **MVP COMPLETE** (Ready for Testing)
 **Date**: 2025-11-13
@@ -8,34 +8,34 @@
 
 ## 🎉 Project Completion Summary
 
-The Whisper Voice Input project is **functionally complete** and ready for initial testing! All core components have been implemented, documented, and integrated.
+The Murmur project is **functionally complete** and ready for initial testing! All core components have been implemented, documented, and integrated.
 
 ---
 
 ## ✅ Completed Components (100%)
 
 ### Core Backend (100%)
-- ✅ **IPC Server** (`whisper_daemon/ipc_server.py`)
+- ✅ **IPC Server** (`murmur_daemon/ipc_server.py`)
   - Unix socket communication
   - JSON message protocol
   - Command handlers with error handling
   - Thread-safe client/server implementation
 
-- ✅ **Configuration System** (`whisper_daemon/config.py`)
+- ✅ **Configuration System** (`murmur_daemon/config.py`)
   - YAML-based configuration
   - Multi-location config search
   - Deep merge with defaults
   - Runtime configuration get/set
   - Automatic logging setup
 
-- ✅ **Text Injector** (`whisper_daemon/text_injector.py`)
+- ✅ **Text Injector** (`murmur_daemon/text_injector.py`)
   - 3-tier fallback system
   - ydotool direct injection
   - Auto-paste via Ctrl+V simulation
   - Clipboard fallback
   - Status reporting and error handling
 
-- ✅ **Audio Capture** (`whisper_daemon/audio_capture.py`)
+- ✅ **Audio Capture** (`murmur_daemon/audio_capture.py`)
   - Real-time audio capture with sounddevice
   - Voice Activity Detection (VAD)
   - Chunked audio processing
@@ -44,7 +44,7 @@ The Whisper Voice Input project is **functionally complete** and ready for initi
   - Device detection and selection
   - Performance statistics
 
-- ✅ **Transcriber** (`whisper_daemon/transcriber.py`)
+- ✅ **Transcriber** (`murmur_daemon/transcriber.py`)
   - faster-whisper integration
   - ROCm GPU acceleration
   - CPU fallback on GPU failure
@@ -54,7 +54,7 @@ The Whisper Voice Input project is **functionally complete** and ready for initi
   - Queue-based processing
   - Model loading/unloading
 
-- ✅ **Main Daemon** (`whisper_daemon/daemon.py`)
+- ✅ **Main Daemon** (`murmur_daemon/daemon.py`)
   - Component orchestration
   - Session state management
   - IPC command handling
@@ -65,7 +65,7 @@ The Whisper Voice Input project is **functionally complete** and ready for initi
 
 ### User Interface (100%)
 
-- ✅ **CLI Tool** (`whisper_cli/cli.py`)
+- ✅ **CLI Tool** (`murmur_cli/cli.py`)
   - `start` command
   - `stop` command
   - `status` command (with verbose mode)
@@ -74,7 +74,7 @@ The Whisper Voice Input project is **functionally complete** and ready for initi
   - Comprehensive error handling
   - Help text and examples
 
-- ✅ **GUI Window** (`whisper_gui/window.py`)
+- ✅ **GUI Window** (`murmur_gui/window.py`)
   - PyQt6 frameless window
   - Center-screen positioning
   - Wayland support
@@ -84,7 +84,7 @@ The Whisper Voice Input project is **functionally complete** and ready for initi
   - Show/hide on command
   - Standalone test mode
 
-- ✅ **Waveform Visualization** (`whisper_gui/waveform.py`)
+- ✅ **Waveform Visualization** (`murmur_gui/waveform.py`)
   - Real-time audio waveform rendering
   - Peak hold indicators
   - Smooth animations (20 FPS)
@@ -92,7 +92,7 @@ The Whisper Voice Input project is **functionally complete** and ready for initi
   - Theme support (dark/light)
   - Performance optimized
 
-- ✅ **GUI Styles** (`whisper_gui/styles.py`)
+- ✅ **GUI Styles** (`murmur_gui/styles.py`)
   - Dark theme (Catppuccin-inspired)
   - Light theme
   - Consistent styling across components
@@ -100,7 +100,7 @@ The Whisper Voice Input project is **functionally complete** and ready for initi
 
 ### System Integration (100%)
 
-- ✅ **Systemd Service** (`systemd/whisper-daemon.service`)
+- ✅ **Systemd Service** (`systemd/murmur-daemon.service`)
   - User service definition
   - Auto-restart on failure
   - Resource limits (CPU, memory)
@@ -134,7 +134,7 @@ The Whisper Voice Input project is **functionally complete** and ready for initi
 ## 📊 Code Statistics
 
 ```
-Project: Whisper Voice Input
+Project: Murmur
 Language breakdown:
   Python:     ~2,500 lines (core functionality)
   Markdown:   ~4,000 lines (documentation)
@@ -228,7 +228,7 @@ Core Functionality: 100%
 
 ```
 Whisper/
-├── whisper_daemon/              Core backend modules
+├── murmur_daemon/              Core backend modules
 │   ├── __init__.py
 │   ├── audio_capture.py         ✅ Audio + VAD
 │   ├── config.py                ✅ Configuration
@@ -237,13 +237,13 @@ Whisper/
 │   ├── text_injector.py         ✅ Text insertion
 │   └── transcriber.py           ✅ Whisper integration
 │
-├── whisper_gui/                 GUI components
+├── murmur_gui/                 GUI components
 │   ├── __init__.py
 │   ├── styles.py                ✅ Qt stylesheets
 │   ├── waveform.py              ✅ Waveform widget
 │   └── window.py                ✅ Main window
 │
-├── whisper_cli/                 Command-line interface
+├── murmur_cli/                 Command-line interface
 │   ├── __init__.py
 │   └── cli.py                   ✅ CLI tool
 │
@@ -255,7 +255,7 @@ Whisper/
 │   └── INSTALLATION.md          ✅ Install guide
 │
 ├── systemd/                     System integration
-│   └── whisper-daemon.service   ✅ Systemd service
+│   └── murmur-daemon.service   ✅ Systemd service
 │
 ├── tests/                       Test suite (TODO)
 │
@@ -339,15 +339,15 @@ bind = SUPER SHIFT, R, exec, whisper stop
 
 ## 📞 Support
 
-- **Issues**: https://github.com/yourusername/Whisper/issues
-- **Discussions**: https://github.com/yourusername/Whisper/discussions
+- **Issues**: https://github.com/abrahamvdl/murmur/issues
+- **Discussions**: https://github.com/abrahamvdl/murmur/discussions
 - **Documentation**: See docs/ folder
 
 ---
 
 ## 🎉 Conclusion
 
-**The Whisper Voice Input project is complete and ready for initial testing!**
+**The Murmur project is complete and ready for initial testing!**
 
 All planned features have been implemented:
 - ✅ Real-time voice-to-text transcription

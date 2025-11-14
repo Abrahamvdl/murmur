@@ -25,7 +25,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
 - [x] Requirements file with ROCm instructions
 
 ### Phase 2: IPC and Configuration ✅
-- [x] **IPC Server** (`whisper_daemon/ipc_server.py`) - 250 lines
+- [x] **IPC Server** (`murmur_daemon/ipc_server.py`) - 250 lines
   - Unix domain socket communication
   - JSON message protocol
   - Command handler registration
@@ -33,7 +33,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Error handling and timeouts
   - Thread-safe server/client implementation
 
-- [x] **Configuration System** (`whisper_daemon/config.py`) - 180 lines
+- [x] **Configuration System** (`murmur_daemon/config.py`) - 180 lines
   - YAML configuration loading
   - Multi-location config file search (`~/.config/whisper`, `~/.whisper`, `/etc/whisper`)
   - Deep merge with defaults
@@ -41,7 +41,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Automatic logging configuration
 
 ### Phase 3: Core Modules ✅
-- [x] **Text Injector** (`whisper_daemon/text_injector.py`) - 200 lines
+- [x] **Text Injector** (`murmur_daemon/text_injector.py`) - 200 lines
   - 3-tier fallback system
     1. Direct injection via ydotool (character-by-character typing)
     2. Auto-paste (clipboard + Ctrl+V simulation)
@@ -50,7 +50,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Status reporting and method tracking
   - Comprehensive error handling
 
-- [x] **Audio Capture** (`whisper_daemon/audio_capture.py`) - 280 lines
+- [x] **Audio Capture** (`murmur_daemon/audio_capture.py`) - 280 lines
   - Real-time audio capture with sounddevice
   - Voice Activity Detection (VAD) with webrtcvad
   - Chunked audio processing (configurable chunk duration)
@@ -60,7 +60,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Performance statistics tracking
   - Thread-safe callback system
 
-- [x] **Transcriber** (`whisper_daemon/transcriber.py`) - 270 lines
+- [x] **Transcriber** (`murmur_daemon/transcriber.py`) - 270 lines
   - faster-whisper integration
   - ROCm GPU acceleration support (RDNA2/3)
   - CPU fallback on GPU failure (auto-detection)
@@ -72,7 +72,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Configurable beam size and VAD filtering
 
 ### Phase 4: Main Daemon ✅
-- [x] **Main Daemon** (`whisper_daemon/daemon.py`) - 420 lines
+- [x] **Main Daemon** (`murmur_daemon/daemon.py`) - 420 lines
   - Component orchestration and lifecycle management
   - Session state machine (IDLE, RECORDING, PROCESSING)
   - IPC command handlers (start, stop, status, shutdown)
@@ -85,7 +85,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Comprehensive error handling and recovery
 
 ### Phase 5: User Interface ✅
-- [x] **CLI Tool** (`whisper_cli/cli.py`) - 220 lines
+- [x] **CLI Tool** (`murmur_cli/cli.py`) - 220 lines
   - `start` command - Start recording session
   - `stop` command - Stop and insert transcription
   - `status` command - Check daemon status (with verbose mode)
@@ -96,7 +96,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Help text with examples and usage guide
   - Configuration and socket path override options
 
-- [x] **GUI Window** (`whisper_gui/window.py`) - 270 lines
+- [x] **GUI Window** (`murmur_gui/window.py`) - 270 lines
   - PyQt6 frameless, floating window
   - Center-screen fixed positioning
   - Full Wayland support (layer-shell compatible)
@@ -108,7 +108,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Standalone test mode for development
   - Configurable size, theme, features
 
-- [x] **Waveform Visualization** (`whisper_gui/waveform.py`) - 180 lines
+- [x] **Waveform Visualization** (`murmur_gui/waveform.py`) - 180 lines
   - Real-time audio waveform rendering
   - Peak hold indicators with decay animation
   - Smooth 20 FPS animation
@@ -118,7 +118,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Performance optimized (downsampling, RMS calculation)
   - Rounded bar rendering with anti-aliasing
 
-- [x] **GUI Styles** (`whisper_gui/styles.py`) - 150 lines
+- [x] **GUI Styles** (`murmur_gui/styles.py`) - 150 lines
   - Complete dark theme (Catppuccin Mocha-inspired)
   - Complete light theme (Catppuccin Latte-inspired)
   - Consistent styling across all components
@@ -128,7 +128,7 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
   - Theme switching support
 
 ### Phase 6: System Integration ✅
-- [x] **Systemd Service** (`systemd/whisper-daemon.service`) - 30 lines
+- [x] **Systemd Service** (`systemd/murmur-daemon.service`) - 30 lines
   - User service definition
   - Auto-restart on failure (RestartSec=5)
   - Resource limits (MemoryMax=4G, CPUQuota=200%)
@@ -403,9 +403,9 @@ The project has reached MVP (Minimum Viable Product) status with all planned fea
 Language                Files       Lines      Code    Comment   Blank
 ─────────────────────────────────────────────────────────────────────
 Python                    10        2682      2150        320      212
-  whisper_daemon           6        1620      1300        210      110
-  whisper_gui              3         600       480         60       60
-  whisper_cli              1         220       180         30       10
+  murmur_daemon           6        1620      1300        210      110
+  murmur_gui              3         600       480         60       60
+  murmur_cli              1         220       180         30       10
 
 YAML                       2         100        85          8        7
 Markdown                  11        5200      5200          0        0

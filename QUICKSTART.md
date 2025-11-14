@@ -89,10 +89,10 @@ whisper status
 
 ```bash
 # Check logs
-journalctl --user -u whisper-daemon -n 50
+journalctl --user -u murmur-daemon -n 50
 
 # Restart daemon
-systemctl --user restart whisper-daemon
+systemctl --user restart murmur-daemon
 ```
 
 ### Text not inserting?
@@ -131,7 +131,7 @@ gui:
 
 Restart daemon after changes:
 ```bash
-systemctl --user restart whisper-daemon
+systemctl --user restart murmur-daemon
 ```
 
 ---
@@ -158,9 +158,9 @@ systemctl --user restart whisper-daemon
 ## Uninstall
 
 ```bash
-systemctl --user stop whisper-daemon
-systemctl --user disable whisper-daemon
-rm ~/.config/systemd/user/whisper-daemon.service
+systemctl --user stop murmur-daemon
+systemctl --user disable murmur-daemon
+rm ~/.config/systemd/user/murmur-daemon.service
 rm -rf ~/.config/whisper
 pip uninstall whisper-voice-input
 ```

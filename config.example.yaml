@@ -1,4 +1,4 @@
-# Whisper Voice Input Configuration
+# Murmur Voice Input Configuration
 
 # Model settings
 model:
@@ -33,9 +33,9 @@ text_insertion:
 
 # IPC settings
 ipc:
-  socket_path: "/tmp/whisper-daemon.sock"
+  socket_path: "/tmp/murmur-daemon.sock"
 
 # Logging
 logging:
   level: "INFO"  # DEBUG, INFO, WARNING, ERROR
-  file: "~/.local/share/whisper/whisper.log"
+  file: "~/.local/share/murmur/murmur.log"

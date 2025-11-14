@@ -1,11 +1,11 @@
 [Unit]
-Description=Whisper Voice Input Daemon
-Documentation=https://github.com/yourusername/Whisper
+Description=Murmur Voice Transcription Daemon
+Documentation=https://github.com/abrahamvdl/murmur
 After=graphical-session.target
 
 [Service]
 Type=simple
-ExecStart=%h/.local/bin/whisper-daemon
+ExecStart=%h/.local/bin/murmur-daemon
 Restart=on-failure
 RestartSec=5
 
@@ -22,7 +22,7 @@ CPUQuota=200%
 # Logging
 StandardOutput=journal
 StandardError=journal
-SyslogIdentifier=whisper-daemon
+SyslogIdentifier=murmur-daemon
 
 [Install]
 WantedBy=default.target

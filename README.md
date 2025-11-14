@@ -1,12 +1,35 @@
-# Whisper Voice Input
+# Murmur
 
-**Real-time voice-to-text transcription for Linux Wayland systems**
+**Real-time voice-to-text transcription for Linux Wayland systems with AMD GPU acceleration**
 
-Transform your voice into text anywhere on your system with a simple keyboard shortcut. Powered by OpenAI's Whisper model with AMD GPU acceleration.
+Transform your voice into text anywhere on your system with a simple keyboard shortcut. Powered by OpenAI's Whisper model with ROCm-accelerated inference.
 
-![Status: In Development](https://img.shields.io/badge/status-in%20development-yellow)
+> *A quieter alternative to Whisper - system-wide voice input for Linux*
+
+![Status: Alpha](https://img.shields.io/badge/status-alpha-yellow)
 ![Python: 3.10+](https://img.shields.io/badge/python-3.10+-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
+![Platform: Linux](https://img.shields.io/badge/platform-linux%20%7C%20wayland-blueviolet)
+![GPU: AMD ROCm](https://img.shields.io/badge/gpu-AMD%20ROCm-red)
+
+> **⚠️ Alpha Quality**: This project is functional but under active development. It works well for my setup (Arch + Hyprland + RX 6000 series), but you may encounter issues with different configurations. Contributions and bug reports welcome!
+
+---
+
+## 🎯 Project Scope
+
+**This project is specifically designed for:**
+- ✅ **AMD GPUs** with ROCm support (RX 6000/7000 series, RDNA 2/3)
+- ✅ **Wayland compositors** (Hyprland, Sway, KDE Wayland, GNOME Wayland)
+- ✅ **Linux** (Arch, Ubuntu 22.04+, Fedora, etc.)
+
+**Known limitations:**
+- ❌ **NVIDIA/Intel GPUs**: Not currently supported (contributions welcome for CUDA/OpenVINO backends)
+- ⚠️ **X11**: May work but untested; Wayland is the primary target
+- ⚠️ **CPU-only mode**: Possible but slow (~10x slower than GPU)
+- ⚠️ **Non-English**: Single language only (contributions welcome for multi-language)
+
+If this matches your setup, read on! Otherwise, consider alternatives like [Nerd Dictation](https://github.com/ideasman42/nerd-dictation) or [Talon Voice](https://talonvoice.com/).
 
 ---
 
@@ -46,35 +69,159 @@ Transform your voice into text anywhere on your system with a simple keyboard sh
 
 ## 🚀 Quick Start
 
-### Arch Linux
+> **Note**: Installation requires compiling CTranslate2 with ROCm support. Budget 30-60 minutes for first-time setup.
 
+### Step 1: Install System Dependencies
+
+**Arch Linux:**
 ```bash
-# Install dependencies
-sudo pacman -S python python-pip rocm-hip-sdk portaudio ydotool qt6-wayland
-
-# Clone and install
-git clone https://github.com/yourusername/Whisper.git
-cd Whisper
-pip install --user -r requirements.txt
-pip install --user ctranslate2-rocm --extra-index-url https://wheels.arlo-phoenix.com/
-pip install --user -e .
-
-# Configure ydotool
-sudo usermod -aG input $USER
-systemctl --user enable --now ydotool.service
-
-# Start daemon
-systemctl --user enable --now whisper-daemon
-
-# Add to Hyprland config (~/.config/hypr/hyprland.conf)
-bind = SUPER SHIFT, Space, exec, whi start
-bind = SUPER SHIFT, R, exec, whi stop
-
-# Reload Hyprland
-hyprctl reload
+sudo pacman -S python python-pip rocm-hip-sdk portaudio ydotool qt6-wayland cmake clang base-devel
 ```
 
-**Detailed installation instructions**: [docs/INSTALLATION.md](docs/INSTALLATION.md)
+**Ubuntu 22.04+:**
+```bash
+# Add ROCm repository first: https://rocm.docs.amd.com/en/latest/deploy/linux/quick_start.html
+sudo apt install python3 python3-pip rocm-hip-sdk portaudio19-dev qt6-base-dev qt6-wayland cmake clang build-essential
+
+# Install ydotool manually (not in Ubuntu repos)
+# See: https://github.com/ReimuNotMoe/ydotool#building
+```
+
+### Step 2: Clone Repository
+
+```bash
+git clone https://github.com/abrahamvdl/murmur.git
+cd murmur
+```
+
+### Step 3: Install CTranslate2 with ROCm
+
+**Option A: Pre-built Wheels (Fastest)**
+
+Try this first - if it works, skip to Step 4:
+```bash
+pip install --user ctranslate2-rocm --extra-index-url https://wheels.arlo-phoenix.com/
+```
+
+**Option B: Build from Source (Recommended for compatibility)**
+
+If pre-built wheels don't work or aren't available:
+
+```bash
+# 1. Identify your GPU architecture
+rocminfo | grep -E "(Marketing Name|gfx)"
+# Example output: gfx1030 (RX 6600/6700), gfx1031 (RX 6800/6900), gfx1100 (RX 7900)
+
+# 2. Clone and build CTranslate2-rocm
+git clone https://github.com/arlo-phoenix/CTranslate2-rocm.git --recurse-submodules --depth 1
+cd CTranslate2-rocm
+mkdir build && cd build
+
+# 3. Configure build (replace gfx1030 with YOUR architecture)
+export PYTORCH_ROCM_ARCH=gfx1030
+export CXX=clang++
+export HIPCXX=/opt/rocm/lib/llvm/bin/clang
+export HIP_PATH=/opt/rocm
+
+cmake -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=$HOME/.local \
+      -DWITH_MKL=OFF \
+      -DWITH_HIP=ON \
+      -DWITH_CUDNN=ON \
+      -DBUILD_TESTS=OFF \
+      -DOPENMP_RUNTIME=COMP \
+      ..
+
+# 4. Build (takes 10-20 minutes)
+make -j$(nproc)
+
+# 5. Install C++ library
+cp libctranslate2.so* ~/.local/lib/
+mkdir -p ~/.local/include
+cp -r ../include/ctranslate2 ~/.local/include/
+cp -r ../include/half_float ~/.local/include/
+cp -r ../include/nlohmann ~/.local/include/
+
+# 6. Build Python package
+cd ../python
+export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
+export CFLAGS="-I$HOME/.local/include"
+export CXXFLAGS="-I$HOME/.local/include"
+export LDFLAGS="-L$HOME/.local/lib -Wl,-rpath,$HOME/.local/lib"
+pip install --user --no-build-isolation .
+
+# 7. Verify
+python -c "import ctranslate2; print(f'CTranslate2 version: {ctranslate2.__version__}')"
+
+# 8. Return to project directory
+cd ../..
+```
+
+**See [docs/ROCM_BUILD.md](docs/ROCM_BUILD.md) for detailed build instructions and troubleshooting.**
+
+### Step 4: Install Whisper Voice Input
+
+```bash
+# Install Python dependencies
+pip install --user -r requirements.txt
+
+# Install in editable mode
+pip install --user -e .
+
+# Verify installation
+whi --help
+```
+
+### Step 5: Configure ydotool
+
+```bash
+# Add user to input group (required for keyboard injection)
+sudo usermod -aG input $USER
+
+# Enable ydotool daemon
+systemctl --user enable --now ydotool.service
+
+# IMPORTANT: Log out and log back in for group changes to take effect
+```
+
+### Step 6: Install and Start Daemon
+
+```bash
+# Copy systemd service
+mkdir -p ~/.config/systemd/user
+cp systemd/murmur-daemon.service ~/.config/systemd/user/
+
+# If you built CTranslate2 from source, update the service file:
+# Edit ~/.config/systemd/user/murmur-daemon.service and add:
+#   Environment="LD_LIBRARY_PATH=/home/YOUR_USERNAME/.local/lib"
+
+# Reload systemd and start daemon
+systemctl --user daemon-reload
+systemctl --user enable --now murmur-daemon
+
+# Check daemon status
+whi status
+```
+
+### Step 7: Configure Keybindings
+
+**Hyprland** (`~/.config/hypr/hyprland.conf`):
+```bash
+bind = SUPER SHIFT, Space, exec, murmur start
+bind = SUPER SHIFT, R, exec, murmur stop
+```
+
+**Sway** (`~/.config/sway/config`):
+```bash
+bindsym $mod+Shift+Space exec whi start
+bindsym $mod+Shift+r exec whi stop
+```
+
+Then reload your compositor configuration.
+
+---
+
+**🔍 Troubleshooting**: See [docs/INSTALLATION.md](docs/INSTALLATION.md) for detailed troubleshooting and distribution-specific instructions.
 
 ---
 
@@ -181,7 +328,7 @@ For detailed architecture: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
 ### whisper (CLI)
 User-facing command-line tool for controlling recording sessions.
 
-### whisper-daemon (Background Service)
+### murmur-daemon (Background Service)
 Persistent service that:
 - Keeps Whisper model loaded (fast startup)
 - Manages audio capture and VAD
@@ -201,7 +348,7 @@ Floating overlay that displays:
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/Whisper.git
+git clone https://github.com/abrahamvdl/murmur.git
 cd Whisper
 
 # Create virtual environment
@@ -213,7 +360,7 @@ pip install -r requirements.txt
 pip install -e ".[dev]"
 
 # Run daemon in debug mode
-python -m whisper_daemon.daemon --log-level DEBUG
+python -m murmur_daemon.daemon --log-level DEBUG
 
 # Format code
 black .
@@ -228,16 +375,22 @@ See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for detailed development guide.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please:
+Contributions are welcome! This is an alpha project with plenty of room for improvement.
 
-1. Fork the repository
+**High-priority contributions:**
+- NVIDIA/Intel GPU backend support
+- Multi-language support
+- Automated tests (pytest)
+- Distribution packaging (AUR, Deb, RPM)
+
+**Process:**
+1. Open an issue to discuss major changes first
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Make your changes
-4. Format code with black
-5. Commit using conventional commits (`feat: add amazing feature`)
-6. Push and create a Pull Request
+3. Format code with `black` (line length 100)
+4. Use conventional commits (`feat:`, `fix:`, `docs:`)
+5. Push and create a Pull Request
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+See [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) for development setup.
 
 ---
 
@@ -246,7 +399,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ### Daemon won't start
 ```bash
 # Check logs
-journalctl --user -u whisper-daemon -n 50
+journalctl --user -u murmur-daemon -n 50
 
 # Verify ROCm
 rocminfo
@@ -318,10 +471,23 @@ MIT License - See [LICENSE](LICENSE) for details.
 
 ---
 
-## 📞 Support
+## 📞 Support & Contributing
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/Whisper/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/Whisper/discussions)
+**Before opening an issue**, please:
+1. Check [docs/INSTALLATION.md](docs/INSTALLATION.md) troubleshooting section
+2. Search existing issues
+3. Include your setup: distro, GPU model, ROCm version, compositor
+
+**Contributions welcome for:**
+- NVIDIA/Intel GPU support (CUDA, OpenVINO backends)
+- Multi-language support
+- Automated tests
+- Packaging (AUR, Debian, Fedora)
+- Bug fixes and documentation improvements
+
+**Links:**
+- **Issues**: GitHub Issues
+- **Discussions**: GitHub Discussions
 - **Documentation**: [docs/](docs/)
 
 ---
@@ -329,6 +495,23 @@ MIT License - See [LICENSE](LICENSE) for details.
 ## ⭐ Star History
 
 If you find this project useful, please consider giving it a star! ⭐
+
+---
+
+## 📢 Project Status & Disclaimer
+
+This is a personal project developed and tested on my specific setup:
+- **Hardware**: AMD RX 6000 series GPU
+- **Distro**: Arch Linux
+- **Compositor**: Hyprland
+- **ROCm**: 6.0+
+
+**It works well for this configuration**, but your mileage may vary with different hardware, distributions, or compositors. I'm sharing this project in the hope it's useful to others, but cannot guarantee it will work perfectly on all setups.
+
+**Please contribute** if you:
+- Get it working on different hardware/distros
+- Find and fix bugs
+- Want to add features (especially NVIDIA/Intel GPU support)
 
 ---
 

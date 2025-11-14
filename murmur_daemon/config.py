@@ -42,7 +42,7 @@ class Config:
             "fallback_enabled": True,
         },
         "ipc": {
-            "socket_path": "/tmp/whisper-daemon.sock",
+            "socket_path": "/tmp/murmur-daemon.sock",
         },
         "logging": {
             "level": "INFO",
@@ -70,7 +70,7 @@ class Config:
 
         # Check standard locations
         possible_paths = [
-            Path("~/.config/whisper/config.yaml").expanduser(),
+            Path("~/.config/murmur/config.yaml").expanduser(),
             Path("~/.whisper/config.yaml").expanduser(),
             Path("/etc/whisper/config.yaml"),
         ]
@@ -172,7 +172,7 @@ class Config:
         save_path = Path(path).expanduser() if path else self.config_path
 
         if not save_path:
-            save_path = Path("~/.config/whisper/config.yaml").expanduser()
+            save_path = Path("~/.config/murmur/config.yaml").expanduser()
 
         # Create directory if it doesn't exist
         save_path.parent.mkdir(parents=True, exist_ok=True)

@@ -5,7 +5,7 @@ import json
 import sys
 from pathlib import Path
 
-from whisper_daemon.ipc_server import IPCClient
+from murmur_daemon.ipc_server import IPCClient
 
 
 def format_response(response: dict) -> str:
@@ -80,7 +80,7 @@ def cmd_status(args, client: IPCClient) -> int:
         result = response["result"]
 
         # Format status output
-        print("Whisper Voice Input Status")
+        print("Murmur Status")
         print("=" * 60)
 
         daemon_running = result.get("daemon_running", True)  # If we got response, daemon is running
@@ -151,7 +151,7 @@ def main():
     """Main entry point for CLI."""
     parser = argparse.ArgumentParser(
         prog="whi",
-        description="Whisper Voice Input - Real-time voice-to-text for Linux",
+        description="Murmur - Real-time voice-to-text for Linux",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -180,7 +180,7 @@ For more information, see: https://github.com/yourusername/Whisper
         "--socket",
         type=str,
         help="Path to daemon socket",
-        default="/tmp/whisper-daemon.sock",
+        default="/tmp/murmur-daemon.sock",
     )
 
     subparsers = parser.add_subparsers(dest="command", help="Command to execute")

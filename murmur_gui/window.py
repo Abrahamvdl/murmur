@@ -1,4 +1,4 @@
-"""Main GUI window for Whisper voice input."""
+"""Main GUI window for Murmur."""
 
 import time
 from typing import Optional
@@ -17,8 +17,8 @@ from PyQt6.QtWidgets import (
     QFrame,
 )
 
-from whisper_gui.waveform import WaveformWidget
-from whisper_gui.styles import get_theme
+from murmur_gui.waveform import WaveformWidget
+from murmur_gui.styles import get_theme
 
 
 class WhisperWindow(QMainWindow):
@@ -57,7 +57,7 @@ class WhisperWindow(QMainWindow):
         self.is_recording = False
 
         # Setup window
-        self.setWindowTitle("Whisper Voice Input")
+        self.setWindowTitle("Murmur")
         self.setFixedSize(width, height)
 
         # Make window frameless and stay on top

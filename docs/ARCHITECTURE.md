@@ -52,7 +52,7 @@ Whisper Voice Input is a real-time voice-to-text transcription tool designed for
 
 **Technologies**: Python, argparse
 
-#### 2. Background Daemon (`whisper-daemon`)
+#### 2. Background Daemon (`murmur-daemon`)
 **Purpose**: Persistent service that manages transcription pipeline
 
 **Responsibilities**:
@@ -89,7 +89,7 @@ Response:
 
 **Technologies**: Unix domain sockets (fast, local, secure)
 
-**Socket Location**: `/tmp/whisper-daemon.sock`
+**Socket Location**: `/tmp/murmur-daemon.sock`
 
 #### 4. Audio Capture Module
 **Purpose**: Capture and process audio input
@@ -186,9 +186,9 @@ Microphone → sounddevice → VAD Filter → Chunks → Transcriber
 - Qt stylesheets for theming
 
 **Window Behavior**:
-- Opens on `whi start`
+- Opens on `murmur start`
 - Shows real-time transcription as user speaks
-- Stays open after recording stops (until `whi stop` or user closes)
+- Stays open after recording stops (until `murmur stop` or user closes)
 - Frameless, floating overlay
 
 **UI Layout**:

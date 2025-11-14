@@ -25,13 +25,13 @@ current thread is QThread(0x7eff48001d60))
 ```
 
 **Steps to Reproduce**:
-1. Start daemon: `python -m whisper_daemon.daemon`
+1. Start daemon: `python -m murmur_daemon.daemon`
 2. Wait for initialization
 3. Run: `whisper start`
 4. Daemon crashes immediately
 
 **Root Cause**:
-In `whisper_daemon/daemon.py`, the `_handle_start_command()` method directly calls:
+In `murmur_daemon/daemon.py`, the `_handle_start_command()` method directly calls:
 ```python
 if self.gui_window:
     self.gui_window.show()
@@ -77,7 +77,7 @@ class WhisperDaemon:
 **Workaround**: None
 
 **Fix Implemented**:
-Modified `whisper_daemon/daemon.py` to use Qt signals/slots for thread-safe GUI operations:
+Modified `murmur_daemon/daemon.py` to use Qt signals/slots for thread-safe GUI operations:
 
 1. Made `WhisperDaemon` inherit from `QObject`
 2. Added Qt signals: `show_window_signal`, `hide_window_signal`, `update_transcription_signal`, `update_waveform_signal`
@@ -181,7 +181,7 @@ Built ctranslate2-rocm from source since pre-built wheels were unavailable:
 6. **Updated daemon startup script** to include library path:
    ```bash
    export LD_LIBRARY_PATH=$HOME/.local/lib:$LD_LIBRARY_PATH
-   python -m whisper_daemon.daemon
+   python -m murmur_daemon.daemon
    ```
 
 **Fix Verification** (2025-11-13):

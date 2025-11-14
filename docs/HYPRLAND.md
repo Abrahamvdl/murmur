@@ -8,7 +8,7 @@ This guide covers integrating Whisper Voice Input with the Hyprland compositor.
 
 - Hyprland compositor installed and running
 - Whisper Voice Input installed (see [INSTALLATION.md](INSTALLATION.md))
-- Daemon running: `systemctl --user status whisper-daemon`
+- Daemon running: `systemctl --user status murmur-daemon`
 
 ---
 
@@ -18,8 +18,8 @@ Add these lines to your Hyprland configuration file (`~/.config/hypr/hyprland.co
 
 ```conf
 # Whisper Voice Input
-bind = SUPER SHIFT, Space, exec, whi start
-bind = SUPER SHIFT, R, exec, whi stop
+bind = SUPER SHIFT, Space, exec, murmur start
+bind = SUPER SHIFT, R, exec, murmur stop
 ```
 
 ### Explanation
@@ -50,8 +50,8 @@ hyprctl reload
 If you prefer function keys:
 
 ```conf
-bind = , F9, exec, whi start
-bind = , F10, exec, whi stop
+bind = , F9, exec, murmur start
+bind = , F10, exec, murmur stop
 ```
 
 ### Control-based
@@ -59,8 +59,8 @@ bind = , F10, exec, whi stop
 For Ctrl combinations:
 
 ```conf
-bind = CTRL ALT, V, exec, whi start
-bind = CTRL ALT, B, exec, whi stop
+bind = CTRL ALT, V, exec, murmur start
+bind = CTRL ALT, B, exec, murmur stop
 ```
 
 ### Custom Modifiers
@@ -73,8 +73,8 @@ You can use any combination:
 
 Example:
 ```conf
-bind = SUPER CTRL, Space, exec, whi start
-bind = SUPER CTRL, Return, exec, whi stop
+bind = SUPER CTRL, Space, exec, murmur start
+bind = SUPER CTRL, Return, exec, murmur stop
 ```
 
 ---
@@ -149,10 +149,10 @@ bind = SUPER, V, submap, voice
 
 submap = voice
 
-bind = , S, exec, whi start
+bind = , S, exec, murmur start
 bind = , S, submap, reset
 
-bind = , E, exec, whi stop
+bind = , E, exec, murmur stop
 bind = , E, submap, reset
 
 bind = , escape, submap, reset
@@ -199,7 +199,7 @@ case "$choice" in
         whi status | wofi --dmenu
         ;;
     "Restart Daemon")
-        systemctl --user restart whisper-daemon
+        systemctl --user restart murmur-daemon
         ;;
 esac
 ```
@@ -217,7 +217,7 @@ Add a Waybar module to show recording status:
 ```json
 {
     "custom/whisper": {
-        "exec": "systemctl --user is-active whisper-daemon && echo '🎤' || echo '❌'",
+        "exec": "systemctl --user is-active murmur-daemon && echo '🎤' || echo '❌'",
         "interval": 5,
         "on-click": "whi start",
         "on-click-right": "whi stop",
@@ -233,8 +233,8 @@ Show notifications on start/stop:
 
 ```bash
 # In your Hyprland config
-bind = SUPER SHIFT, Space, exec, whi start && notify-send "Whisper" "Recording started"
-bind = SUPER SHIFT, R, exec, whi stop && notify-send "Whisper" "Recording stopped"
+bind = SUPER SHIFT, Space, exec, murmur start && notify-send "Whisper" "Recording started"
+bind = SUPER SHIFT, R, exec, murmur stop && notify-send "Whisper" "Recording stopped"
 ```
 
 ---
@@ -252,10 +252,10 @@ bind = SUPER SHIFT, Space, exec, [[ $(hyprctl activeworkspace -j | jq -r '.id') 
 
 ```conf
 # Workspace 1: Standard keybindings
-workspace = 1, bind = SUPER SHIFT, Space, exec, whi start
+workspace = 1, bind = SUPER SHIFT, Space, exec, murmur start
 
 # Workspace 2: Different keybindings
-workspace = 2, bind = CTRL, Space, exec, whi start
+workspace = 2, bind = CTRL, Space, exec, murmur start
 ```
 
 ---
@@ -266,7 +266,7 @@ workspace = 2, bind = CTRL, Space, exec, whi start
 
 1. Check if daemon is running:
    ```bash
-   systemctl --user status whisper-daemon
+   systemctl --user status murmur-daemon
    ```
 
 2. Check Hyprland logs:
@@ -276,7 +276,7 @@ workspace = 2, bind = CTRL, Space, exec, whi start
 
 3. Try launching window directly:
    ```bash
-   python -m whisper_gui.window
+   python -m murmur_gui.window
    ```
 
 ### Keybindings Not Working
@@ -356,8 +356,8 @@ Here's a complete Hyprland configuration snippet for Whisper:
 # Whisper Voice Input Configuration
 
 # Basic keybindings
-bind = SUPER SHIFT, Space, exec, whi start && notify-send "🎤 Recording"
-bind = SUPER SHIFT, R, exec, whi stop && notify-send "✓ Transcribed"
+bind = SUPER SHIFT, Space, exec, murmur start && notify-send "🎤 Recording"
+bind = SUPER SHIFT, R, exec, murmur stop && notify-send "✓ Transcribed"
 
 # Utility bindings
 bind = SUPER SHIFT, I, exec, notify-send "Whisper Status" "$(whi status)"
@@ -371,7 +371,7 @@ windowrulev2 = noshadow, title:^(Whisper Voice Input)$
 windowrulev2 = opacity 0.95 0.95, title:^(Whisper Voice Input)$
 
 # Startup
-exec-once = systemctl --user start whisper-daemon
+exec-once = systemctl --user start murmur-daemon
 ```
 
 ---
@@ -393,7 +393,7 @@ To remove Whisper integration from Hyprland:
 1. Remove keybindings from `hyprland.conf`
 2. Remove window rules
 3. Reload Hyprland: `hyprctl reload`
-4. Stop daemon: `systemctl --user stop whisper-daemon`
+4. Stop daemon: `systemctl --user stop murmur-daemon`
 
 ---
 

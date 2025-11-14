@@ -2,7 +2,7 @@
 
 ## CLI Commands
 
-### `whi start`
+### `murmur start`
 
 Start a new recording session.
 
@@ -25,12 +25,12 @@ whi start
 
 **Hyprland Keybinding**:
 ```
-bind = SUPER_SHIFT, Space, exec, whi start
+bind = SUPER_SHIFT, Space, exec, murmur start
 ```
 
 ---
 
-### `whi stop`
+### `murmur stop`
 
 Stop the current recording session and insert transcribed text.
 
@@ -54,12 +54,12 @@ whi stop
 
 **Hyprland Keybinding**:
 ```
-bind = SUPER_SHIFT, R, exec, whi stop
+bind = SUPER_SHIFT, R, exec, murmur stop
 ```
 
 ---
 
-### `whi status`
+### `murmur status`
 
 Check daemon and recording status.
 
@@ -85,7 +85,7 @@ whi status
 
 ---
 
-### `whisper-daemon`
+### `murmur-daemon`
 
 Start the background daemon (usually managed by systemd).
 
@@ -95,25 +95,25 @@ Start the background daemon (usually managed by systemd).
 
 **Example**:
 ```bash
-whisper-daemon --config ~/.config/whisper/config.yaml
+murmur-daemon --config ~/.config/whisper/config.yaml
 ```
 
 **Systemd Management**:
 ```bash
 # Start daemon
-systemctl --user start whisper-daemon
+systemctl --user start murmur-daemon
 
 # Stop daemon
-systemctl --user stop whisper-daemon
+systemctl --user stop murmur-daemon
 
 # Enable auto-start
-systemctl --user enable whisper-daemon
+systemctl --user enable murmur-daemon
 
 # Check status
-systemctl --user status whisper-daemon
+systemctl --user status murmur-daemon
 
 # View logs
-journalctl --user -u whisper-daemon -f
+journalctl --user -u murmur-daemon -f
 ```
 
 ---
@@ -124,7 +124,7 @@ journalctl --user -u whisper-daemon -f
 
 Communication between CLI and daemon uses JSON messages over Unix domain socket.
 
-**Socket Location**: `/tmp/whisper-daemon.sock`
+**Socket Location**: `/tmp/murmur-daemon.sock`
 
 **Transport**: Stream-based Unix socket
 
@@ -356,7 +356,7 @@ For developers wanting to integrate Whisper Voice Input into other Python applic
 ### IPCClient
 
 ```python
-from whisper_daemon.ipc_server import IPCClient
+from murmur_daemon.ipc_server import IPCClient
 
 client = IPCClient()
 
@@ -379,7 +379,7 @@ print(response["result"])
 ### TextInjector
 
 ```python
-from whisper_daemon.text_injector import TextInjector, InsertionMethod
+from murmur_daemon.text_injector import TextInjector, InsertionMethod
 
 injector = TextInjector(preferred_method="auto")
 
@@ -398,7 +398,7 @@ print(f"Available methods: {status['available_methods']}")
 ### Config
 
 ```python
-from whisper_daemon.config import Config
+from murmur_daemon.config import Config
 
 config = Config()
 
@@ -514,9 +514,9 @@ YYYY-MM-DD HH:MM:SS - module_name - LEVEL - Message
 
 **Example**:
 ```
-2025-01-15 10:30:45 - whisper_daemon.transcriber - INFO - Model loaded successfully
-2025-01-15 10:30:50 - whisper_daemon.audio_capture - DEBUG - Audio chunk received: 2.0s
-2025-01-15 10:30:52 - whisper_daemon.transcriber - INFO - Transcription: "Hello world"
+2025-01-15 10:30:45 - murmur_daemon.transcriber - INFO - Model loaded successfully
+2025-01-15 10:30:50 - murmur_daemon.audio_capture - DEBUG - Audio chunk received: 2.0s
+2025-01-15 10:30:52 - murmur_daemon.transcriber - INFO - Transcription: "Hello world"
 ```
 
 ### Log Levels

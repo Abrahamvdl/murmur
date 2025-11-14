@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 class IPCServer:
     """Unix socket server for inter-process communication."""
 
-    def __init__(self, socket_path: str = "/tmp/whisper-daemon.sock"):
+    def __init__(self, socket_path: str = "/tmp/murmur-daemon.sock"):
         self.socket_path = socket_path
         self.server_socket = None
         self.running = False
@@ -129,7 +129,7 @@ class IPCServer:
 class IPCClient:
     """Client for communicating with the daemon via Unix socket."""
 
-    def __init__(self, socket_path: str = "/tmp/whisper-daemon.sock"):
+    def __init__(self, socket_path: str = "/tmp/murmur-daemon.sock"):
         self.socket_path = socket_path
 
     def send_command(self, command: str, **args) -> Dict[str, Any]:

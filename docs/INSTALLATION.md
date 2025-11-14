@@ -1,4 +1,4 @@
-# Whisper Voice Input - Installation Guide
+# Murmur - Installation Guide
 
 ## System Requirements
 
@@ -35,7 +35,7 @@ sudo pacman -S python python-pip rocm-hip-sdk portaudio ydotool qt6-base qt6-way
 
 # Clone repository
 cd ~/Downloads
-git clone https://github.com/yourusername/Whisper.git
+git clone https://github.com/abrahamvdl/murmur.git
 cd Whisper
 
 # Install Python dependencies
@@ -104,7 +104,7 @@ sudo make install
 ```bash
 # Clone repository
 cd ~/Downloads
-git clone https://github.com/yourusername/Whisper.git
+git clone https://github.com/abrahamvdl/murmur.git
 cd Whisper
 
 # Create virtual environment (optional but recommended)
@@ -134,7 +134,7 @@ systemctl --user enable --now ydotool.service
 ### Option 3: Installation Script (Coming Soon)
 
 ```bash
-curl -sSL https://raw.githubusercontent.com/yourusername/Whisper/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/abrahamvdl/murmur/main/install.sh | bash
 ```
 
 ---
@@ -194,13 +194,13 @@ python3 -c "import sounddevice as sd; print(sd.query_devices())"
 ```bash
 # Copy service file
 mkdir -p ~/.config/systemd/user
-cp systemd/whisper-daemon.service ~/.config/systemd/user/
+cp systemd/murmur-daemon.service ~/.config/systemd/user/
 
 # Edit service file to update paths if needed
-nano ~/.config/systemd/user/whisper-daemon.service
+nano ~/.config/systemd/user/murmur-daemon.service
 
 # If you used a virtual environment, update ExecStart path:
-# ExecStart=/home/yourusername/Downloads/Whisper/venv/bin/whisper-daemon
+# ExecStart=/home/yourusername/Downloads/Whisper/venv/bin/murmur-daemon
 ```
 
 ### 2. Enable and Start Service
@@ -210,13 +210,13 @@ nano ~/.config/systemd/user/whisper-daemon.service
 systemctl --user daemon-reload
 
 # Enable service (auto-start on login)
-systemctl --user enable whisper-daemon
+systemctl --user enable murmur-daemon
 
 # Start service now
-systemctl --user start whisper-daemon
+systemctl --user start murmur-daemon
 
 # Check status
-systemctl --user status whisper-daemon
+systemctl --user status murmur-daemon
 ```
 
 ### 3. Verify Daemon is Running
@@ -250,13 +250,13 @@ nano ~/.config/hypr/hyprland.conf
 Add these lines to your keybindings section:
 
 ```conf
-# Whisper Voice Input
-bind = SUPER SHIFT, Space, exec, whi start
-bind = SUPER SHIFT, R, exec, whi stop
+# Murmur
+bind = SUPER SHIFT, Space, exec, murmur start
+bind = SUPER SHIFT, R, exec, murmur stop
 
 # Alternative: use function keys
-# bind = , F9, exec, whi start
-# bind = , F10, exec, whi stop
+# bind = , F9, exec, murmur start
+# bind = , F10, exec, murmur stop
 ```
 
 **Recommended Keybindings**:
@@ -305,10 +305,10 @@ whi stop
 
 ```bash
 # View recent logs
-journalctl --user -u whisper-daemon -n 50
+journalctl --user -u murmur-daemon -n 50
 
 # Follow logs in real-time
-journalctl --user -u whisper-daemon -f
+journalctl --user -u murmur-daemon -f
 ```
 
 ---
@@ -319,7 +319,7 @@ journalctl --user -u whisper-daemon -f
 
 **Check logs**:
 ```bash
-journalctl --user -u whisper-daemon --no-pager
+journalctl --user -u murmur-daemon --no-pager
 ```
 
 **Common issues**:
@@ -348,7 +348,7 @@ journalctl --user -u whisper-daemon --no-pager
 3. **Permission denied for socket**
    ```bash
    # Check socket permissions
-   ls -l /tmp/whisper-daemon.sock
+   ls -l /tmp/murmur-daemon.sock
 
    # Should be owned by your user
    ```
@@ -522,11 +522,11 @@ sudo rocm-smi -d 0 --setpoweroverdrive 150
 
 ```bash
 # Stop and disable daemon
-systemctl --user stop whisper-daemon
-systemctl --user disable whisper-daemon
+systemctl --user stop murmur-daemon
+systemctl --user disable murmur-daemon
 
 # Remove service file
-rm ~/.config/systemd/user/whisper-daemon.service
+rm ~/.config/systemd/user/murmur-daemon.service
 systemctl --user daemon-reload
 
 # Uninstall Python package
@@ -562,7 +562,7 @@ pip install --upgrade -r requirements.txt
 pip install --user -e .
 
 # Restart daemon
-systemctl --user restart whisper-daemon
+systemctl --user restart murmur-daemon
 ```
 
 ---
@@ -572,14 +572,14 @@ systemctl --user restart whisper-daemon
 ### Check Logs
 ```bash
 # Daemon logs
-journalctl --user -u whisper-daemon -f
+journalctl --user -u murmur-daemon -f
 
 # Application logs
 tail -f ~/.local/share/whisper/whisper.log
 ```
 
 ### Report Issues
-- GitHub Issues: https://github.com/yourusername/Whisper/issues
+- GitHub Issues: https://github.com/abrahamvdl/murmur/issues
 - Include:
   - OS and distribution
   - AMD GPU model
@@ -588,7 +588,7 @@ tail -f ~/.local/share/whisper/whisper.log
   - Configuration file (remove sensitive info)
 
 ### Community
-- Discussions: https://github.com/yourusername/Whisper/discussions
+- Discussions: https://github.com/abrahamvdl/murmur/discussions
 - Matrix/Discord: (TODO)
 
 ---
@@ -616,7 +616,7 @@ Create separate config files:
 
 Run daemon with specific config:
 ```bash
-whisper-daemon --config ~/.config/whisper/work.yaml
+murmur-daemon --config ~/.config/whisper/work.yaml
 ```
 
 ### Hyprland Window Rules

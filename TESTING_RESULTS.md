@@ -45,7 +45,7 @@
 - ✅ **CPU fallback worked automatically!**
 - ✅ Model loaded successfully on CPU (base.en)
 - ✅ ydotool detected and available
-- ✅ IPC server started on /tmp/whisper-daemon.sock
+- ✅ IPC server started on /tmp/murmur-daemon.sock
 - ✅ All components initialized successfully
 - ✅ **Daemon running and ready!**
 

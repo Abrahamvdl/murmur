@@ -13,12 +13,12 @@ import numpy as np
 from PyQt6.QtWidgets import QApplication
 from PyQt6.QtCore import QTimer, QObject, pyqtSignal
 
-from whisper_daemon.audio_capture import AudioCapture
-from whisper_daemon.config import Config
-from whisper_daemon.ipc_server import IPCServer
-from whisper_daemon.text_injector import TextInjector, InsertionMethod
-from whisper_daemon.transcriber import Transcriber
-from whisper_gui.window import WhisperWindow
+from murmur_daemon.audio_capture import AudioCapture
+from murmur_daemon.config import Config
+from murmur_daemon.ipc_server import IPCServer
+from murmur_daemon.text_injector import TextInjector, InsertionMethod
+from murmur_daemon.transcriber import Transcriber
+from murmur_gui.window import WhisperWindow
 
 
 logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class SessionState(Enum):
 
 
 class WhisperDaemon(QObject):
-    """Main daemon service for Whisper voice input."""
+    """Main daemon service for Murmur."""
 
     # Qt signals for thread-safe GUI operations
     show_window_signal = pyqtSignal()
@@ -456,7 +456,7 @@ def main():
     """Main entry point for daemon."""
     parser = argparse.ArgumentParser(
         prog="whisper-daemon",
-        description="Whisper Voice Input Daemon",
+        description="Murmur Daemon",
     )
 
     parser.add_argument(
