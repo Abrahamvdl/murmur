@@ -53,7 +53,7 @@ sudo apt install qt6-base-dev qt6-wayland
 ```bash
 cd ~/Workspace/Linux
 git clone https://github.com/Abrahamvdl/murmur.git
-cd Whisper
+cd murmur
 ```
 
 ### Setup Python Environment
@@ -269,7 +269,7 @@ python -m murmur_daemon.daemon --log-level DEBUG
 
 ```bash
 # Tail log file
-tail -f ~/.local/share/whisper/whisper.log
+tail -f ~/.local/share/murmur/whisper.log
 
 # If using systemd
 journalctl --user -u murmur-daemon -f

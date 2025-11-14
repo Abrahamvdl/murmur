@@ -154,7 +154,7 @@ class IPCClient:
         except FileNotFoundError:
             return {
                 "status": "error",
-                "message": "Daemon is not running. Start it with: systemctl --user start whisper-daemon"
+                "message": "Daemon is not running. Start it with: systemctl --user start murmur-daemon"
             }
         except socket.timeout:
             return {"status": "error", "message": "Command timed out"}

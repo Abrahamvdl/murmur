@@ -1,4 +1,4 @@
-"""Main Whisper daemon service."""
+"""Main Murmur daemon service."""
 
 import argparse
 import logging
@@ -18,7 +18,7 @@ from murmur_daemon.config import Config
 from murmur_daemon.ipc_server import IPCServer
 from murmur_daemon.text_injector import TextInjector, InsertionMethod
 from murmur_daemon.transcriber import Transcriber
-from murmur_gui.window import WhisperWindow
+from murmur_gui.window import MurmurWindow
 
 
 logger = logging.getLogger(__name__)
@@ -32,7 +32,7 @@ class SessionState(Enum):
     PROCESSING = "processing"
 
 
-class WhisperDaemon(QObject):
+class MurmurDaemon(QObject):
     """Main daemon service for Murmur."""
 
     # Qt signals for thread-safe GUI operations
@@ -52,7 +52,7 @@ class WhisperDaemon(QObject):
 
         # Load configuration
         self.config = Config(config_path)
-        logger.info("Whisper daemon initializing...")
+        logger.info("Murmur daemon initializing...")
 
         # Session state
         self.state = SessionState.IDLE
@@ -68,7 +68,7 @@ class WhisperDaemon(QObject):
 
         # GUI components
         self.qapp: Optional[QApplication] = None
-        self.gui_window: Optional[WhisperWindow] = None
+        self.gui_window: Optional[MurmurWindow] = None
 
         # Shutdown flag
         self.running = True
@@ -94,7 +94,7 @@ class WhisperDaemon(QObject):
                 self.qapp.setQuitOnLastWindowClosed(False)  # Don't quit when window closes
 
             # Initialize GUI window
-            self.gui_window = WhisperWindow(
+            self.gui_window = MurmurWindow(
                 width=self.config.get("gui", "window_width"),
                 height=self.config.get("gui", "window_height"),
                 theme=self.config.get("gui", "theme"),
@@ -386,7 +386,7 @@ class WhisperDaemon(QObject):
 
     def run(self):
         """Main daemon loop."""
-        logger.info("Whisper daemon started and ready")
+        logger.info("Murmur daemon started and ready")
 
         try:
             # Use Qt event loop instead of simple sleep loop
@@ -455,7 +455,7 @@ class WhisperDaemon(QObject):
 def main():
     """Main entry point for daemon."""
     parser = argparse.ArgumentParser(
-        prog="whisper-daemon",
+        prog="murmur-daemon",
         description="Murmur Daemon",
     )
 
@@ -478,7 +478,7 @@ def main():
 
     # Create daemon
     try:
-        daemon = WhisperDaemon(config_path=args.config)
+        daemon = MurmurDaemon(config_path=args.config)
 
         # Override log level if specified
         if args.log_level:

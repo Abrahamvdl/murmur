@@ -1,4 +1,4 @@
-"""Configuration management for Whisper daemon."""
+"""Configuration management for Murmur daemon."""
 
 import logging
 import os
@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 class Config:
-    """Configuration manager for Whisper daemon."""
+    """Configuration manager for Murmur daemon."""
 
     DEFAULT_CONFIG = {
         "model": {
@@ -46,7 +46,7 @@ class Config:
         },
         "logging": {
             "level": "INFO",
-            "file": "~/.local/share/whisper/whisper.log",
+            "file": "~/.local/share/murmur/murmur.log",
         },
     }
 
@@ -71,8 +71,8 @@ class Config:
         # Check standard locations
         possible_paths = [
             Path("~/.config/murmur/config.yaml").expanduser(),
-            Path("~/.whisper/config.yaml").expanduser(),
-            Path("/etc/whisper/config.yaml"),
+            Path("~/.murmur/config.yaml").expanduser(),
+            Path("/etc/murmur/config.yaml"),
         ]
 
         for path in possible_paths:

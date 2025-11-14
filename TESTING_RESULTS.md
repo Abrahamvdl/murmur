@@ -1,4 +1,4 @@
-# Whisper Voice Input - Testing Results
+# Murmur - Testing Results
 
 **Test Date**: 2025-11-13
 **Tester**: Abraham van der Linde
@@ -20,7 +20,7 @@
 - ✅ All Python dependencies installed
 - ⚠️ ctranslate2-rocm failed to download (network issue with arlo-phoenix.com)
   - **Workaround**: Standard ctranslate2 (4.6.1) installed successfully
-- ✅ whisper-voice-input package installed in editable mode
+- ✅ murmur-voice package installed in editable mode
 - ✅ Configuration directory and file created
 - ✅ ydotool service enabled
 - ✅ Systemd service file created
@@ -64,7 +64,7 @@ whisper status
 
 **Output**:
 ```
-Whisper Voice Input Status
+Murmur Status
 ============================================================
 Daemon:           🟢 Running
 Recording:        ⚪ Idle

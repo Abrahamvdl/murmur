@@ -21,7 +21,7 @@ from murmur_gui.waveform import WaveformWidget
 from murmur_gui.styles import get_theme
 
 
-class WhisperWindow(QMainWindow):
+class MurmurWindow(QMainWindow):
     """Main floating window for voice input."""
 
     # Signals for thread-safe GUI updates
@@ -235,7 +235,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     # Create window
-    window = WhisperWindow(theme="dark")
+    window = MurmurWindow(theme="dark")
     window.show()
 
     # Simulate some updates for testing

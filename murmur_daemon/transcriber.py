@@ -1,4 +1,4 @@
-"""Whisper transcription module with streaming support."""
+"""Murmur transcription module with streaming support."""
 
 import logging
 import queue
@@ -28,7 +28,7 @@ class Transcriber:
 
         Args:
             model_size: Model size (tiny, base, small, medium, large)
-            device: Device to run model on (cuda for ROCm, cpu)
+            device: Device to run model on (cuda for GPU/ROCm, cpu for CPU)
             compute_type: Precision (float16, int8, float32)
             language: Language code (en for English)
             model_path: Optional custom model path

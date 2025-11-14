@@ -159,7 +159,7 @@ cd ../..
 
 **See [docs/ROCM_BUILD.md](docs/ROCM_BUILD.md) for detailed build instructions and troubleshooting.**
 
-### Step 4: Install Whisper Voice Input
+### Step 4: Install Murmur
 
 ```bash
 # Install Python dependencies
@@ -271,12 +271,12 @@ Whisper tries three methods automatically:
 
 ## ⚙️ Configuration
 
-Configuration file: `~/.config/whisper/config.yaml`
+Configuration file: `~/.config/murmur/config.yaml`
 
 ```yaml
 model:
   size: "medium"           # tiny, base, small, medium, large
-  device: "cuda"           # Use AMD GPU via ROCm
+  device: "cuda"           # Device name for GPU (works with AMD ROCm, not NVIDIA)
   compute_type: "float16"
 
 audio:
@@ -349,7 +349,7 @@ Floating overlay that displays:
 ```bash
 # Clone repository
 git clone https://github.com/Abrahamvdl/murmur.git
-cd Whisper
+cd murmur
 
 # Create virtual environment
 python -m venv venv

@@ -1,4 +1,4 @@
-"""Whisper CLI tool for controlling the daemon."""
+"""Murmur CLI tool for controlling the daemon."""
 
 import argparse
 import json

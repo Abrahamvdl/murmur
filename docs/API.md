@@ -1,4 +1,4 @@
-# Whisper Voice Input - API Reference
+# Murmur - API Reference
 
 ## CLI Commands
 
@@ -95,7 +95,7 @@ Start the background daemon (usually managed by systemd).
 
 **Example**:
 ```bash
-murmur-daemon --config ~/.config/whisper/config.yaml
+murmur-daemon --config ~/.config/murmur/config.yaml
 ```
 
 **Systemd Management**:
@@ -288,7 +288,7 @@ Gracefully shut down daemon.
 
 ### Configuration File Format
 
-**Location**: `~/.config/whisper/config.yaml`
+**Location**: `~/.config/murmur/config.yaml`
 
 **Format**: YAML
 
@@ -351,7 +351,7 @@ gui:
 
 ## Python API
 
-For developers wanting to integrate Whisper Voice Input into other Python applications.
+For developers wanting to integrate Murmur into other Python applications.
 
 ### IPCClient
 
@@ -528,12 +528,12 @@ YYYY-MM-DD HH:MM:SS - module_name - LEVEL - Message
 
 ### Log Location
 
-Default: `~/.local/share/whisper/whisper.log`
+Default: `~/.local/share/murmur/whisper.log`
 
 Configurable in `config.yaml`:
 ```yaml
 logging:
-  file: "~/.local/share/whisper/whisper.log"
+  file: "~/.local/share/murmur/whisper.log"
 ```
 
 ### Log Rotation

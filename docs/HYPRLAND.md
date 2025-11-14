@@ -1,13 +1,13 @@
-# Whisper Voice Input - Hyprland Integration Guide
+# Murmur - Hyprland Integration Guide
 
-This guide covers integrating Whisper Voice Input with the Hyprland compositor.
+This guide covers integrating Murmur with the Hyprland compositor.
 
 ---
 
 ## Prerequisites
 
 - Hyprland compositor installed and running
-- Whisper Voice Input installed (see [INSTALLATION.md](INSTALLATION.md))
+- Murmur installed (see [INSTALLATION.md](INSTALLATION.md))
 - Daemon running: `systemctl --user status murmur-daemon`
 
 ---
@@ -17,7 +17,7 @@ This guide covers integrating Whisper Voice Input with the Hyprland compositor.
 Add these lines to your Hyprland configuration file (`~/.config/hypr/hyprland.conf`):
 
 ```conf
-# Whisper Voice Input
+# Murmur
 bind = SUPER SHIFT, Space, exec, murmur start
 bind = SUPER SHIFT, R, exec, murmur stop
 ```
@@ -87,8 +87,8 @@ The GUI window is already configured to float, but you can add explicit rules:
 
 ```conf
 # Whisper window rules
-windowrulev2 = float, title:^(Whisper Voice Input)$
-windowrulev2 = center, title:^(Whisper Voice Input)$
+windowrulev2 = float, title:^(Murmur)$
+windowrulev2 = center, title:^(Murmur)$
 ```
 
 ### Pin to All Workspaces
@@ -96,7 +96,7 @@ windowrulev2 = center, title:^(Whisper Voice Input)$
 Make the window sticky (visible on all workspaces):
 
 ```conf
-windowrulev2 = pin, title:^(Whisper Voice Input)$
+windowrulev2 = pin, title:^(Murmur)$
 ```
 
 ### Disable Shadows
@@ -104,7 +104,7 @@ windowrulev2 = pin, title:^(Whisper Voice Input)$
 For a cleaner look:
 
 ```conf
-windowrulev2 = noshadow, title:^(Whisper Voice Input)$
+windowrulev2 = noshadow, title:^(Murmur)$
 ```
 
 ### Size and Position
@@ -112,8 +112,8 @@ windowrulev2 = noshadow, title:^(Whisper Voice Input)$
 Override default size:
 
 ```conf
-windowrulev2 = size 700 350, title:^(Whisper Voice Input)$
-windowrulev2 = move center, title:^(Whisper Voice Input)$
+windowrulev2 = size 700 350, title:^(Murmur)$
+windowrulev2 = move center, title:^(Murmur)$
 ```
 
 ### Opacity
@@ -121,18 +121,18 @@ windowrulev2 = move center, title:^(Whisper Voice Input)$
 Make window semi-transparent:
 
 ```conf
-windowrulev2 = opacity 0.95, title:^(Whisper Voice Input)$
+windowrulev2 = opacity 0.95, title:^(Murmur)$
 ```
 
 ### Complete Window Rules Example
 
 ```conf
-# Whisper Voice Input Window Rules
-windowrulev2 = float, title:^(Whisper Voice Input)$
-windowrulev2 = center, title:^(Whisper Voice Input)$
-windowrulev2 = pin, title:^(Whisper Voice Input)$
-windowrulev2 = noshadow, title:^(Whisper Voice Input)$
-windowrulev2 = opacity 0.95, title:^(Whisper Voice Input)$
+# Murmur Window Rules
+windowrulev2 = float, title:^(Murmur)$
+windowrulev2 = center, title:^(Murmur)$
+windowrulev2 = pin, title:^(Murmur)$
+windowrulev2 = noshadow, title:^(Murmur)$
+windowrulev2 = opacity 0.95, title:^(Murmur)$
 ```
 
 ---
@@ -222,7 +222,7 @@ Add a Waybar module to show recording status:
         "on-click": "whi start",
         "on-click-right": "whi stop",
         "tooltip": true,
-        "tooltip-format": "Whisper Voice Input"
+        "tooltip-format": "Murmur"
     }
 }
 ```
@@ -320,7 +320,7 @@ workspace = 2, bind = CTRL, Space, exec, murmur start
 
 ### Reduce Latency
 
-In `~/.config/whisper/config.yaml`:
+In `~/.config/murmur/config.yaml`:
 
 ```yaml
 audio:
@@ -353,7 +353,7 @@ Here's a complete Hyprland configuration snippet for Whisper:
 ```conf
 # ~/.config/hypr/hyprland.conf
 
-# Whisper Voice Input Configuration
+# Murmur Configuration
 
 # Basic keybindings
 bind = SUPER SHIFT, Space, exec, murmur start && notify-send "🎤 Recording"
@@ -364,11 +364,11 @@ bind = SUPER SHIFT, I, exec, notify-send "Whisper Status" "$(whi status)"
 bind = SUPER SHIFT, W, exec, ~/.config/hypr/scripts/whisper-menu.sh
 
 # Window rules
-windowrulev2 = float, title:^(Whisper Voice Input)$
-windowrulev2 = center, title:^(Whisper Voice Input)$
-windowrulev2 = pin, title:^(Whisper Voice Input)$
-windowrulev2 = noshadow, title:^(Whisper Voice Input)$
-windowrulev2 = opacity 0.95 0.95, title:^(Whisper Voice Input)$
+windowrulev2 = float, title:^(Murmur)$
+windowrulev2 = center, title:^(Murmur)$
+windowrulev2 = pin, title:^(Murmur)$
+windowrulev2 = noshadow, title:^(Murmur)$
+windowrulev2 = opacity 0.95 0.95, title:^(Murmur)$
 
 # Startup
 exec-once = systemctl --user start murmur-daemon

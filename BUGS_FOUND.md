@@ -1,4 +1,4 @@
-# Whisper Voice Input - Bugs Found During Testing
+# Murmur - Bugs Found During Testing
 
 **Test Date**: 2025-11-13
 **Status**: Initial Testing Phase
@@ -230,7 +230,7 @@ Configuration file had `vad_aggressiveness: 3` (maximum) combined with 30% voice
 - Result: Most chunks rejected even during continuous speech
 
 **Fix Implemented** (2025-11-13):
-Changed `~/.config/whisper/config.yaml`:
+Changed `~/.config/murmur/config.yaml`:
 ```yaml
 audio:
   vad_aggressiveness: 1  # Changed from 3 to 1 (balanced)

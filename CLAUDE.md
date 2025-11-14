@@ -142,7 +142,7 @@ groups | grep input  # User must be in 'input' group
 
 ## Configuration System
 
-**Location**: `~/.config/whisper/config.yaml` (primary), fallbacks to `~/.whisper/config.yaml` and `/etc/whisper/config.yaml`
+**Location**: `~/.config/murmur/config.yaml` (primary), fallbacks to `~/.whisper/config.yaml` and `/etc/whisper/config.yaml`
 
 **Format**: YAML (see `config.example.yaml`)
 

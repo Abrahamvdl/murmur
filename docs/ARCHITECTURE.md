@@ -1,8 +1,8 @@
-# Whisper Voice Input - Architecture Documentation
+# Murmur - Architecture Documentation
 
 ## Overview
 
-Whisper Voice Input is a real-time voice-to-text transcription tool designed for Linux Wayland systems. It provides system-wide speech-to-text capability through keyboard shortcuts configured in the window manager (Hyprland).
+Murmur is a real-time voice-to-text transcription tool designed for Linux Wayland systems. It provides system-wide speech-to-text capability through keyboard shortcuts configured in the window manager (Hyprland).
 
 ## System Architecture
 
@@ -211,7 +211,7 @@ Microphone → sounddevice → VAD Filter → Chunks → Transcriber
 **Format**: YAML
 
 **Locations** (checked in order):
-1. `~/.config/whisper/config.yaml`
+1. `~/.config/murmur/config.yaml`
 2. `~/.whisper/config.yaml`
 3. `/etc/whisper/config.yaml`
 
@@ -367,7 +367,7 @@ Text appears in application
    - Suggest ROCm troubleshooting
 
 ### Logging Strategy
-- All components log to `~/.local/share/whisper/whisper.log`
+- All components log to `~/.local/share/murmur/whisper.log`
 - Configurable log level (DEBUG, INFO, WARNING, ERROR)
 - Log rotation (keep last 5 files, 10MB each)
 

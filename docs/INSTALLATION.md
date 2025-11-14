@@ -36,7 +36,7 @@ sudo pacman -S python python-pip rocm-hip-sdk portaudio ydotool qt6-base qt6-way
 # Clone repository
 cd ~/Downloads
 git clone https://github.com/Abrahamvdl/murmur.git
-cd Whisper
+cd murmur
 
 # Install Python dependencies
 pip install --user -r requirements.txt
@@ -105,7 +105,7 @@ sudo make install
 # Clone repository
 cd ~/Downloads
 git clone https://github.com/Abrahamvdl/murmur.git
-cd Whisper
+cd murmur
 
 # Create virtual environment (optional but recommended)
 python3 -m venv venv
@@ -150,13 +150,13 @@ mkdir -p ~/.config/whisper
 ### 2. Copy Example Configuration
 
 ```bash
-cp config.example.yaml ~/.config/whisper/config.yaml
+cp config.example.yaml ~/.config/murmur/config.yaml
 ```
 
 ### 3. Edit Configuration
 
 ```bash
-nano ~/.config/whisper/config.yaml
+nano ~/.config/murmur/config.yaml
 ```
 
 **Minimal Configuration**:
@@ -283,7 +283,7 @@ whi status
 # Start recording
 whi start
 
-# Speak: "This is a test of the whisper voice input system"
+# Speak: "This is a test of the murmur system"
 
 # Stop recording
 whi stop
@@ -530,7 +530,7 @@ rm ~/.config/systemd/user/murmur-daemon.service
 systemctl --user daemon-reload
 
 # Uninstall Python package
-pip uninstall whisper-voice-input
+pip uninstall murmur-voice
 
 # Remove configuration
 rm -rf ~/.config/whisper
@@ -575,7 +575,7 @@ systemctl --user restart murmur-daemon
 journalctl --user -u murmur-daemon -f
 
 # Application logs
-tail -f ~/.local/share/whisper/whisper.log
+tail -f ~/.local/share/murmur/whisper.log
 ```
 
 ### Report Issues
@@ -608,15 +608,15 @@ Create separate config files:
 
 ```bash
 # Work setup (headset)
-~/.config/whisper/work.yaml
+~/.config/murmur/work.yaml
 
 # Home setup (desk mic)
-~/.config/whisper/home.yaml
+~/.config/murmur/home.yaml
 ```
 
 Run daemon with specific config:
 ```bash
-murmur-daemon --config ~/.config/whisper/work.yaml
+murmur-daemon --config ~/.config/murmur/work.yaml
 ```
 
 ### Hyprland Window Rules

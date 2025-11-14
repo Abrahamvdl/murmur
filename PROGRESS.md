@@ -1,4 +1,4 @@
-# Whisper Voice Input - Development Progress
+# Murmur - Development Progress
 
 **Last Updated**: 2025-11-13
 **Status**: ✅ **MVP COMPLETE - READY FOR TESTING**
@@ -7,7 +7,7 @@
 
 ## Overview
 
-This document tracks the development progress of the Whisper Voice Input project.
+This document tracks the development progress of the Murmur project.
 
 **🎉 ALL CORE DEVELOPMENT COMPLETED!**
 
@@ -498,7 +498,7 @@ Issues will be documented here as they are discovered during testing.
 
 ## 🎉 Milestone Achieved!
 
-**Whisper Voice Input MVP Development: COMPLETE**
+**Murmur MVP Development: COMPLETE**
 
 All planned features have been successfully implemented:
 - ✅ Real-time voice-to-text with GPU acceleration

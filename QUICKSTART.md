@@ -1,4 +1,4 @@
-# Whisper Voice Input - Quick Start Guide
+# Murmur - Quick Start Guide
 
 Get up and running in 5 minutes!
 
@@ -39,7 +39,7 @@ If you were added to the `input` group, log out and back in for changes to take 
 Edit `~/.config/hypr/hyprland.conf`:
 
 ```conf
-# Whisper Voice Input
+# Murmur
 bind = SUPER SHIFT, Space, exec, ~/.local/bin/whisper start
 bind = SUPER SHIFT, R, exec, ~/.local/bin/whisper stop
 ```
@@ -116,7 +116,7 @@ python -c "import sounddevice as sd; print(sd.query_devices())"
 
 ## Configuration
 
-Edit `~/.config/whisper/config.yaml`:
+Edit `~/.config/murmur/config.yaml`:
 
 ```yaml
 model:
@@ -162,7 +162,7 @@ systemctl --user stop murmur-daemon
 systemctl --user disable murmur-daemon
 rm ~/.config/systemd/user/murmur-daemon.service
 rm -rf ~/.config/whisper
-pip uninstall whisper-voice-input
+pip uninstall murmur-voice
 ```
 
 ---
