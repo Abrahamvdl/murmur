@@ -169,7 +169,7 @@ pip install --user -r requirements.txt
 pip install --user -e .
 
 # Verify installation
-whi --help
+murmur --help
 ```
 
 ### Step 5: Configure ydotool
@@ -200,7 +200,7 @@ systemctl --user daemon-reload
 systemctl --user enable --now murmur-daemon
 
 # Check daemon status
-whi status
+murmur status
 ```
 
 ### Step 7: Configure Keybindings
@@ -213,8 +213,8 @@ bind = SUPER SHIFT, R, exec, murmur stop
 
 **Sway** (`~/.config/sway/config`):
 ```bash
-bindsym $mod+Shift+Space exec whi start
-bindsym $mod+Shift+r exec whi stop
+bindsym $mod+Shift+Space exec murmur start
+bindsym $mod+Shift+r exec murmur stop
 ```
 
 Then reload your compositor configuration.
@@ -240,13 +240,13 @@ Then reload your compositor configuration.
 
 ```bash
 # Start recording
-whi start
+murmur start
 
 # Stop recording and insert text
-whi stop
+murmur stop
 
 # Check status
-whi status
+murmur status
 ```
 
 ### With Hyprland Keybindings
@@ -300,7 +300,7 @@ See [config.example.yaml](config.example.yaml) for all options.
 
 ```
 ┌─────────────────────────────────────────────┐
-│ Hyprland Keybinding → CLI (whi start)   │
+│ Hyprland Keybinding → CLI (murmur start)│
 └──────────────┬──────────────────────────────┘
                │ Unix Socket
 ┌──────────────▼──────────────────────────────┐
