@@ -1,0 +1,28 @@
+[Unit]
+Description=Whisper Voice Input Daemon
+Documentation=https://github.com/yourusername/Whisper
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/whisper-daemon
+Restart=on-failure
+RestartSec=5
+
+# Environment variables
+Environment="PYTHONUNBUFFERED=1"
+Environment="QT_QPA_PLATFORM=wayland"
+# Uncomment and adjust for your AMD GPU if needed
+# Environment="HSA_OVERRIDE_GFX_VERSION=10.3.0"
+
+# Resource limits
+MemoryMax=4G
+CPUQuota=200%
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=whisper-daemon
+
+[Install]
+WantedBy=default.target

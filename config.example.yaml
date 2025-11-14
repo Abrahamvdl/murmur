@@ -1,0 +1,41 @@
+# Whisper Voice Input Configuration
+
+# Model settings
+model:
+  size: "medium"  # Options: tiny, base, small, medium, large
+  language: "en"  # English only for this version
+  device: "cuda"  # Use CUDA for AMD ROCm
+  compute_type: "float16"  # float16 for GPU, int8 for CPU
+  model_path: null  # Optional: custom model path
+
+# Audio settings
+audio:
+  sample_rate: 16000  # Whisper requires 16kHz
+  channels: 1  # Mono audio
+  chunk_duration: 2.0  # Seconds per transcription chunk
+  vad_aggressiveness: 1  # 0-3 (0=permissive, 1=balanced, 2=aggressive, 3=very aggressive)
+                         # Recommended: 1 for normal use, 2-3 only for very noisy environments
+  device_index: null  # null = default microphone
+
+# GUI settings
+gui:
+  window_width: 600
+  window_height: 300
+  theme: "dark"  # Options: dark, light
+  font_size: 12
+  show_waveform: true
+  show_timer: true
+
+# Text insertion settings
+text_insertion:
+  method: "auto"  # auto will try: direct -> auto_paste -> clipboard
+  fallback_enabled: true
+
+# IPC settings
+ipc:
+  socket_path: "/tmp/whisper-daemon.sock"
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  file: "~/.local/share/whisper/whisper.log"
